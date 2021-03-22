@@ -1,14 +1,16 @@
 package filter;
 
+import jobGroup.RuleOperator;
+
 public class Rules {
 
-   public Operator operator;
+   public RuleOperator operator;
    public String attribute;
    public String value;
 
     public Rules()
     {
-     operator = Operator.ANY;
+     operator = RuleOperator.valueOf("NOT_EQUAL");
      attribute = "Category";
      value = "Sales";
     }
@@ -16,7 +18,7 @@ public class Rules {
     @Override
     public String toString()
     {
-        return attribute+" = "+value;
+        return "{"+attribute+" "+ operator+" "+value+"}";
     }
 
 }

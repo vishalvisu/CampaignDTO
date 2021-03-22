@@ -6,13 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import java.util.*;
-
 public class Main {
 
     public static int index=0;
 
-    public Generic generic;
+   // public Generic generic;
     public JobFilter jobFilter;
     public ObjectMapper objectMapper;
 
@@ -34,56 +32,52 @@ public class Main {
 
        main1.base();
 
-
-
-       // System.out.println( objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jobFilter));
-
-    //    System.out.println(jobFilter.rules.get(0).toString());
-
-
-      //  String str  =  objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(main1.dtO(jobFilter));
-
-
     }
 
     public void base() throws JsonProcessingException {
 
+        jobFilter.addFilter();
+      //  jobFilter.addFilter();
+      //  jobFilter.addFilter();
 
-      //  jobFilter.jobFilters.add(new JobFilter());
-        System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dtO(jobFilter)));
+     //   System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jobFilter));
+       System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(new Filter(dtO(jobFilter))));
 
     }
 
-  public Object dtO (JobFilter filters) {
+  public Object dtO (JobFilter filter) throws JsonProcessingException {
 
-        if(filters==null)
-            return null;
 
-        generic = new Generic();
+        Object tmp = null;
+       Generic generic = new Generic();
 
-        generic.operator = filters.operator;
+        generic.operator = filter.getOperator();
 
-        generic.rules.addAll(filters.rules);
+      generic.rules.addAll(filter.getRules());
 
-      Object tmp = dtO(this.getNextFilter(filters));
 
-        if(tmp!=null)
-        generic.rules.add(tmp);
+   //   System.out.println(generic.toString());
+       for(JobFilter filters : filter.jobFilters) {
 
-         return generic;
+           tmp = dtO(filters);
+               generic.rules.add(tmp);
+          // System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(generic));
+              // System.out.println(generic.rules.toString());
+       }
+
+       return generic;
    }
 
 
 
-  public   JobFilter getNextFilter(JobFilter filter)
+  public JobFilter getNextFilter(JobFilter filter)
     {
         System.out.println(index);
-        if(index >= filter.jobFilters.size()) {
+        if(index >= filter.getJobFilters().size()) {
             index = 0;
             return null;
         }
         else
-        return  filter.jobFilters.get(index++);
+        return  filter.getJobFilters().get(index++);
     }
-
 }
