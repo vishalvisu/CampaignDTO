@@ -2,17 +2,17 @@ package filter;
 
 import jobGroup.RuleOperator;
 
-public class Rules {
+public class Rules<T> {
 
    public RuleOperator operator;
    public String attribute;
-   public String value;
+   public T value;
 
-    public Rules()
+    public Rules(T value)
     {
      operator = RuleOperator.valueOf("NOT_EQUAL");
      attribute = "Category";
-     value = "Sales";
+     this.value = value;
     }
 
     @Override

@@ -1,601 +1,199 @@
 package jobGroup;
 
+import cap.CapDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import filter.Filter;
+import filter.JobFilter;
+import filter.Main;
+
+import java.time.LocalDate;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
 
-/*public class JobGroupDTO
-{
-    private JobGroupParams params;
-
-    public void setParams(JobGroupParams params){
-        this.params = params;
-    }
-    public JobGroupParams getParams(){
-        return this.params;
-    }
-}
-
-public class JobGroupParams
-{
-    private String name;
-
-    private String campaignId;
-
-    private String startDate;
-
-    private String endDate;
-
-    private int priority;
-
-    private String category;
-
-    private int cpcBid;
-
-    private int cpaBid;
-
-    private String clientId;
-
-    private List<String> clientIds;
-
-    private String sign;
-
-    private Filters filters;
-
-    private BudgetCap budgetCap;
-
-    private ClicksCap clicksCap;
-
-    private AppliesCap appliesCap;
-
-    private OverspendCap overspendCap;
-
-    private JobBudgetCap jobBudgetCap;
-
-    private JobClicksCap jobClicksCap;
-
-    private JobAppliesCap jobAppliesCap;
-
-    private TradingGoals tradingGoals;
-
-    private List<Placements> placements;
-
-    private RecommendationAudit recommendationAudit;
-
-    private List<Integer> daysToSchedule;
-
-    private boolean isPPC;
-
-    public void setName(String name){
-        this.name = name;
-    }
-    public String getName(){
-        return this.name;
-    }
-    public void setCampaignId(String campaignId){
-        this.campaignId = campaignId;
-    }
-    public String getCampaignId(){
-        return this.campaignId;
-    }
-    public void setStartDate(String startDate){
-        this.startDate = startDate;
-    }
-    public String getStartDate(){
-        return this.startDate;
-    }
-    public void setEndDate(String endDate){
-        this.endDate = endDate;
-    }
-    public String getEndDate(){
-        return this.endDate;
-    }
-    public void setPriority(int priority){
-        this.priority = priority;
-    }
-    public int getPriority(){
-        return this.priority;
-    }
-    public void setCategory(String category){
-        this.category = category;
-    }
-    public String getCategory(){
-        return this.category;
-    }
-    public void setCpcBid(int cpcBid){
-        this.cpcBid = cpcBid;
-    }
-    public int getCpcBid(){
-        return this.cpcBid;
-    }
-    public void setCpaBid(int cpaBid){
-        this.cpaBid = cpaBid;
-    }
-    public int getCpaBid(){
-        return this.cpaBid;
-    }
-    public void setClientId(String clientId){
-        this.clientId = clientId;
-    }
-    public String getClientId(){
-        return this.clientId;
-    }
-    public void setClientIds(List<String> clientIds){
-        this.clientIds = clientIds;
-    }
-    public List<String> getClientIds(){
-        return this.clientIds;
-    }
-    public void setSign(String sign){
-        this.sign = sign;
-    }
-    public String getSign(){
-        return this.sign;
-    }
-    public void setFilters(Filters filters){
-        this.filters = filters;
-    }
-    public Filters getFilters(){
-        return this.filters;
-    }
-    public void setBudgetCap(BudgetCap budgetCap){
-        this.budgetCap = budgetCap;
-    }
-    public BudgetCap getBudgetCap(){
-        return this.budgetCap;
-    }
-    public void setClicksCap(ClicksCap clicksCap){
-        this.clicksCap = clicksCap;
-    }
-    public ClicksCap getClicksCap(){
-        return this.clicksCap;
-    }
-    public void setAppliesCap(AppliesCap appliesCap){
-        this.appliesCap = appliesCap;
-    }
-    public AppliesCap getAppliesCap(){
-        return this.appliesCap;
-    }
-    public void setOverspendCap(OverspendCap overspendCap){
-        this.overspendCap = overspendCap;
-    }
-    public OverspendCap getOverspendCap(){
-        return this.overspendCap;
-    }
-    public void setJobBudgetCap(JobBudgetCap jobBudgetCap){
-        this.jobBudgetCap = jobBudgetCap;
-    }
-    public JobBudgetCap getJobBudgetCap(){
-        return this.jobBudgetCap;
-    }
-    public void setJobClicksCap(JobClicksCap jobClicksCap){
-        this.jobClicksCap = jobClicksCap;
-    }
-    public JobClicksCap getJobClicksCap(){
-        return this.jobClicksCap;
-    }
-    public void setJobAppliesCap(JobAppliesCap jobAppliesCap){
-        this.jobAppliesCap = jobAppliesCap;
-    }
-    public JobAppliesCap getJobAppliesCap(){
-        return this.jobAppliesCap;
-    }
-    public void setTradingGoals(TradingGoals tradingGoals){
-        this.tradingGoals = tradingGoals;
-    }
-    public TradingGoals getTradingGoals(){
-        return this.tradingGoals;
-    }
-    public void setPlacements(List<Placements> placements){
-        this.placements = placements;
-    }
-    public List<Placements> getPlacements(){
-        return this.placements;
-    }
-    public void setRecommendationAudit(RecommendationAudit recommendationAudit){
-        this.recommendationAudit = recommendationAudit;
-    }
-    public RecommendationAudit getRecommendationAudit(){
-        return this.recommendationAudit;
-    }
-    public void setDaysToSchedule(List<int> daysToSchedule){
-        this.daysToSchedule = daysToSchedule;
-    }
-    public List<int> getDaysToSchedule(){
-        return this.daysToSchedule;
-    }
-    public void setIsPPC(boolean isPPC){
-        this.isPPC = isPPC;
-    }
-    public boolean getIsPPC(){
-        return this.isPPC;
-    }
-}
-
-
-
-
-class Rules
-{
-    private String operator;
-
-    private String field;
-
-    private String data;
-
-    public void setOperator(String operator){
-        this.operator = operator;
-    }
-    public String getOperator(){
-        return this.operator;
-    }
-    public void setField(String field){
-        this.field = field;
-    }
-    public String getField(){
-        return this.field;
-    }
-    public void setData(String data){
-        this.data = data;
-    }
-    public String getData(){
-        return this.data;
-    }
-}
+public class JobGroupDTO {
+    public JobGroupParams jobGroupParams;
+
+    public JobGroupDTO(String name,String campaignId,String clientId) throws JsonProcessingException {
+        jobGroupParams = new JobGroupParams(name,campaignId,clientId);
+    }
+
+    public static class JobGroupParams {
+
+        public String name;
+        public String campaignId;
+        public LocalDate startDate;
+        public LocalDate endDate;
+        public int priority;
+        public String category;
+        public int cpcBid;
+        public int cpaBid;
+        public String clientId;
+        public List<String> clientIds;
+        public String sign;
+        public Object filters;
+        public CapDTO budgetCap;
+        public CapDTO clicksCap;
+        public CapDTO appliesCap;
+        public OverspendCap overspendCap;
+        public CapDTO jobBudgetCap;
+        public CapDTO jobClicksCap;
+        public CapDTO jobAppliesCap;
+        public TradingGoals tradingGoals;
+        public List<Placements> placements;
+        public RecommendationAudit recommendationAudit;
+        public List<Integer> daysToSchedule;
+        public boolean isPPC;
 
- class Filters
-{
-    private String operator;
-
-    private List<Rules> rules;
-
-    public void setOperator(String operator){
-        this.operator = operator;
-    }
-    public String getOperator(){
-        return this.operator;
-    }
-    public void setRules(List<Rules> rules){
-        this.rules = rules;
-    }
-    public List<Rules> getRules(){
-        return this.rules;
-    }
-}
+        public JobGroupParams(String name,String campaignId,String clientId) throws JsonProcessingException {
+            this.name = name;
+            this.campaignId = campaignId;
+            this.startDate = LocalDate.now();
+            this.endDate = LocalDate.now().plusWeeks(1);
+            this.priority = 5;
+            this.category = "";
+            this.cpcBid = 1;
+            this.cpaBid = 2;
+            this.clientId = clientId;
 
- class BudgetCap
-{
-    private boolean pacing;
+            this.clientIds = new ArrayList<>();
 
-    private String freq;
+            this.clientIds.add(clientId);
 
-    private int threshold;
+            this.sign = "$";
 
-    private int value;
+            this.filters = new Main().base();
 
-    public void setPacing(boolean pacing){
-        this.pacing = pacing;
-    }
-    public boolean getPacing(){
-        return this.pacing;
-    }
-    public void setFreq(String freq){
-        this.freq = freq;
-    }
-    public String getFreq(){
-        return this.freq;
-    }
-    public void setThreshold(int threshold){
-        this.threshold = threshold;
-    }
-    public int getThreshold(){
-        return this.threshold;
-    }
-    public void setValue(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return this.value;
-    }
-}
+            this.budgetCap = new CapDTO();
+            this.clicksCap = new CapDTO();
+            this.appliesCap = new CapDTO();
 
-class ClicksCap
-{
-    private boolean pacing;
+            this.overspendCap = new OverspendCap(clientId);
 
-    private String freq;
+            this.jobBudgetCap = new CapDTO();
 
-    private int threshold;
+            this.jobClicksCap = new CapDTO();
 
-    private int value;
+            this.jobAppliesCap = new CapDTO();
 
-    public void setPacing(boolean pacing){
-        this.pacing = pacing;
-    }
-    public boolean getPacing(){
-        return this.pacing;
-    }
-    public void setFreq(String freq){
-        this.freq = freq;
-    }
-    public String getFreq(){
-        return this.freq;
-    }
-    public void setThreshold(int threshold){
-        this.threshold = threshold;
-    }
-    public int getThreshold(){
-        return this.threshold;
-    }
-    public void setValue(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return this.value;
-    }
-}
- class AppliesCap
-{
-    private boolean pacing;
+            this.tradingGoals = new TradingGoals();
 
-    private String freq;
+            this.placements = new ArrayList<>();
+            this.placements.add(new Placements());
 
-    private int threshold;
+            recommendationAudit = new RecommendationAudit();
+            this.daysToSchedule = new ArrayList<>();
+            this.daysToSchedule.add(0);
+            this.daysToSchedule.add(2);
+            this.daysToSchedule.add(4);
+            this.daysToSchedule.add(5);
+            this.daysToSchedule.add(6);
 
-    private int value;
+            this.isPPC = true;
 
-    public void setPacing(boolean pacing){
-        this.pacing = pacing;
-    }
-    public boolean getPacing(){
-        return this.pacing;
-    }
-    public void setFreq(String freq){
-        this.freq = freq;
-    }
-    public String getFreq(){
-        return this.freq;
-    }
-    public void setThreshold(int threshold){
-        this.threshold = threshold;
-    }
-    public int getThreshold(){
-        return this.threshold;
-    }
-    public void setValue(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return this.value;
-    }
-}
+        }
 
- class OverspendCap
-{
-    private String maxJobCount;
+        public static class OverspendCap {
+            public String status;
+            public int maxJobCount;
+            public String clientId;
+            public String filterBy;
+            public String orderBy;
+            public int timePeriodSec;
 
-    public void setMaxJobCount(String maxJobCount){
-        this.maxJobCount = maxJobCount;
-    }
-    public String getMaxJobCount(){
-        return this.maxJobCount;
-    }
-}
+            public OverspendCap(String clientId)
+            {
+                this.status = "A";
+                this.maxJobCount = 10;
+                this.clientId = clientId;
+                filterBy = "SPEND";
+                orderBy = "ASCENDING";
+                timePeriodSec = 2592000;
 
- class JobBudgetCap
-{
-    private boolean pacing;
+            }
 
-    private String freq;
+        }
 
-    private int threshold;
+            public static class TradingGoals {
+                public List<IoDetails> ioDetails;
 
-    private int value;
+                public List<PerformanceTargets> performanceTargets;
 
-    public void setPacing(boolean pacing){
-        this.pacing = pacing;
-    }
-    public boolean getPacing(){
-        return this.pacing;
-    }
-    public void setFreq(String freq){
-        this.freq = freq;
-    }
-    public String getFreq(){
-        return this.freq;
-    }
-    public void setThreshold(int threshold){
-        this.threshold = threshold;
-    }
-    public int getThreshold(){
-        return this.threshold;
-    }
-    public void setValue(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return this.value;
-    }
-}
+                public TradingGoals()
+                {
 
- class JobClicksCap
-{
-    private boolean pacing;
+                    ioDetails = new ArrayList<>();
+                    ioDetails.add(new IoDetails());
 
-    private String freq;
+                    performanceTargets = new ArrayList<>();
+                    performanceTargets.add(new PerformanceTargets("cpc",3));
+                    performanceTargets.add(new PerformanceTargets("cpa",4));
 
-    private int threshold;
 
-    private int value;
+                }
 
-    public void setPacing(boolean pacing){
-        this.pacing = pacing;
-    }
-    public boolean getPacing(){
-        return this.pacing;
-    }
-    public void setFreq(String freq){
-        this.freq = freq;
-    }
-    public String getFreq(){
-        return this.freq;
-    }
-    public void setThreshold(int threshold){
-        this.threshold = threshold;
-    }
-    public int getThreshold(){
-        return this.threshold;
-    }
-    public void setValue(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return this.value;
-    }
-}
+                public static class IoDetails {
+                    public String number;
 
- class JobAppliesCap
-{
-    private boolean pacing;
+                    public int value;
 
-    private String freq;
+                    public LocalDate startDate;
 
-    private int threshold;
+                    public LocalDate endDate;
 
-    private int value;
+                    public IoDetails()
+                    {
+                        this.number = "10000";
+                        this.value = 1000;
+                        this.startDate = LocalDate.now().plusWeeks(3);
+                        this.endDate = LocalDate.now().plusYears(2);
+                    }
 
-    public void setPacing(boolean pacing){
-        this.pacing = pacing;
-    }
-    public boolean getPacing(){
-        return this.pacing;
-    }
-    public void setFreq(String freq){
-        this.freq = freq;
-    }
-    public String getFreq(){
-        return this.freq;
-    }
-    public void setThreshold(int threshold){
-        this.threshold = threshold;
-    }
-    public int getThreshold(){
-        return this.threshold;
-    }
-    public void setValue(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return this.value;
-    }
-}
+                }
 
 
- class IoDetails
-{
-    private String number;
+                public static class PerformanceTargets {
+                    public String type;
+                    public int value;
 
-    private int value;
+                    public PerformanceTargets(String type,int value)
+                    {
+                        this.type = type;
+                        this.value = value;
+                    }
+                }
+            }
 
-    private String startDate;
+                        public static class Placements {
+                            public String pValue;
 
-    private String endDate;
+                            public Placements()
+                            {
+                                this.pValue = "pg";
+                            }
+                        }
 
-    public void setNumber(String number){
-        this.number = number;
-    }
-    public String getNumber(){
-        return this.number;
-    }
-    public void setValue(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return this.value;
-    }
-    public void setStartDate(String startDate){
-        this.startDate = startDate;
-    }
-    public String getStartDate(){
-        return this.startDate;
-    }
-    public void setEndDate(String endDate){
-        this.endDate = endDate;
-    }
-    public String getEndDate(){
-        return this.endDate;
-    }
-}
 
-class PerformanceTargets
-{
-    private String type;
+                            public static class RecommendationAudit {
+                                public List<String> result;
 
-    private int value;
+                                public List<String> acceptedResult;
 
-    public void setType(String type){
-        this.type = type;
-    }
-    public String getType(){
-        return this.type;
-    }
-    public void setValue(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return this.value;
-    }
-}
+                                public RecommendationAudit()
+                                {
+                                    this.result = new ArrayList<>();
 
- class TradingGoals
-{
-    private List<IoDetails> ioDetails;
+                                    this.acceptedResult = new ArrayList<>();
 
-    private List<PerformanceTargets> performanceTargets;
+                                }
 
-    public void setIoDetails(List<IoDetails> ioDetails){
-        this.ioDetails = ioDetails;
-    }
-    public List<IoDetails> getIoDetails(){
-        return this.ioDetails;
-    }
-    public void setPerformanceTargets(List<PerformanceTargets> performanceTargets){
-        this.performanceTargets = performanceTargets;
-    }
-    public List<PerformanceTargets> getPerformanceTargets(){
-        return this.performanceTargets;
-    }
-}
+                            }
+                        }
+                    }
 
- class Placements
-{
-    private String pValue;
 
-    public void setPValue(String pValue){
-        this.pValue = pValue;
-    }
-    public String getPValue(){
-        return this.pValue;
-    }
-}
 
-class RecommendationAudit
-{
-    private List<String> result;
 
-    private List<String> acceptedResult;
 
-    public void setResult(List<String> result){
-        this.result = result;
-    }
-    public List<String> getResult(){
-        return this.result;
-    }
-    public void setAcceptedResult(List<String> acceptedResult){
-        this.acceptedResult = acceptedResult;
-    }
-    public List<String> getAcceptedResult(){
-        return this.acceptedResult;
-    }
-}*/
 

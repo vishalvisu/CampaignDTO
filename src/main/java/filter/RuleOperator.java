@@ -1,4 +1,4 @@
-package jobGroup;
+package filter;
 
 public enum RuleOperator {
     EQUAL,

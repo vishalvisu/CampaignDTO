@@ -25,8 +25,12 @@ public class JobFilter {
         operator = Operator.AND;
         rules = new ArrayList<>();
 
-        rules.add(new Rules());
-       // rules.add(new Rules());
+        List<String> list = new ArrayList<>();
+
+        list.add("sales");
+        list.add("marketing");
+
+        rules.add(new Rules<List<String>>(list));
 
         jobFilters = new ArrayList<>();
 
