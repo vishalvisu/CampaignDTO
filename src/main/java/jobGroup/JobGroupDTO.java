@@ -111,10 +111,19 @@ public class JobGroupDTO {
         params.placements.add(new JobGroupParams.Placements(pValue));
     }
 
+    public void setDaysToSchedule(List<Integer> daysToSchedule)
+    {
+        if(params.daysToSchedule==null)
+            params.daysToSchedule = new ArrayList<>();
+
+        params.daysToSchedule.addAll(daysToSchedule);
+    }
+
     public void setIsPPC(Boolean isPPC)
     {
         params.isPPC = isPPC;
     }
+
 
 
     public static class JobGroupParams {
