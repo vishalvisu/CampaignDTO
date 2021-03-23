@@ -1,24 +1,50 @@
 package filter;
 
-import jobGroup.RuleOperator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.management.MXBean;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Pattern;
 
 public class Rules<T> {
 
    public RuleOperator operator;
-   public String attribute;
-   public T value;
+   public String field;
+   public T data;
 
-    public Rules(T value)
+
+
+    public Rules(RuleOperator ruleOperator,String field, T data)
     {
-     operator = RuleOperator.valueOf("NOT_EQUAL");
-     attribute = "Category";
-     this.value = value;
+      this.operator = ruleOperator;
+      this.field = field;
+      this.data = data;
     }
+
+    @Pattern(regexp = "true",message = "Rule is Invalid, value is InValid with respect to Operator")
+    public String getRulesValidation()
+    {
+        System.out.println("rules");
+            String dataType = data.getClass().getSimpleName();
+
+            if (operator == RuleOperator.IN || operator == RuleOperator.NOT_IN) {
+                if (!dataType.equals("String"))
+                    return "true";
+                return "false";
+            } else {
+                if (dataType.equals("String"))
+                    return "true";
+                return "false";
+            }
+
+    }
+
+
 
     @Override
     public String toString()
     {
-        return "{"+attribute+" "+ operator+" "+value+"}";
+        return "{"+field+" "+ operator+" "+data+"}";
     }
 
 }

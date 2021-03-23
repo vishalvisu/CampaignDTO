@@ -1,6 +1,6 @@
 package filter;
 
-public enum Operator {
+public enum GroupOperator {
 
     AND,
     ANY
